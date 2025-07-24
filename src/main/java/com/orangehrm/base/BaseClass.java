@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,7 +20,7 @@ public class BaseClass {
 		config = new Properties();
 		
 		try {
-			config.load(new FileInputStream("src/config.properties"));
+			config.load(new FileInputStream("/Users/omii/Documents/GitHub/OrangeHRM/config.properties"));
 		} catch (FileNotFoundException e) {
 			
 			System.out.println("Can't able to find the config properties");
@@ -32,7 +31,6 @@ public class BaseClass {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void init() {
 		
 		String browser = config.getProperty("browser");
@@ -40,13 +38,13 @@ public class BaseClass {
 		switch (browser) {
 		case "chrome":
 			
-			System.setProperty("webdriver.chrome.driver", "/OrangeHRM/src/main/resources/chromedriver-mac-arm64/chromedriver");
+			System.setProperty("webdriver.chrome.driver", "/Users/omii/Documents/GitHub/OrangeHRM/Drivers/chromedriver-mac-x64/chromedriver");
 			driver = new ChromeDriver();
 			break;
 			
 		case "firefox":
 			
-			System.setProperty("webdriver.gecko.driver", "/OrangeHRM/src/main/resources/geckodriver");
+			System.setProperty("webdriver.gecko.driver", "/Users/omii/Documents/GitHub/OrangeHRM/Drivers/geckodriver");
 			driver = new FirefoxDriver();
 			break;
 
