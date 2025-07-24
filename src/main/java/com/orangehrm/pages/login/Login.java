@@ -4,22 +4,28 @@ import org.openqa.selenium.WebElement;
 
 import com.orangehrm.CommonFunctions;
 import com.orangehrm.base.BaseClass;
+import com.orangehrm.pages.login.employeemanagement.EmployeeManagement;
 
 public class Login extends CommonFunctions implements Login_OR{
 	
 	/**
 	 * Enter the login details for Orange HRM
+	 * @param id	as userName
+	 * @param pass	as password
+	 * @return Home page object i.e. EmployeeManagement
 	 */
-	public void enterLoginDetails() {
+	public EmployeeManagement enterLoginDetails(String id, String pass) {
 		
 		// Enter username
-		setValue(username, System.getProperty("username"));
+		setValue(username, id);
 		
 		// Enter password
-		setValue(password, System.getProperty("password"));
+		setValue(password, pass);
 		
 		// Click Login button
 		onClick(loginBtn);
+		
+		return new EmployeeManagement();
 	}
 	
 	/**
