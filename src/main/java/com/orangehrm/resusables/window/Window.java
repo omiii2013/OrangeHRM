@@ -11,8 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orangehrm.CommonFunctions;
+import com.orangehrm.base.BaseClass;
 
-public class Window extends CommonFunctions implements Window_OR{
+public class Window extends BaseClass implements Window_OR{
 	
 	public void switchToWindow(int index) {
 		
@@ -68,7 +69,7 @@ public class Window extends CommonFunctions implements Window_OR{
 		boolean close = closeWindow.length > 0 ? closeWindow[0] : false;
 	    String originalWindow = driver.getWindowHandle();
 	    
-	    onClick(locator);
+	    cf.onClick(locator);
 
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	    wait.until(driver -> driver.getWindowHandles().size() > 1);
