@@ -10,9 +10,6 @@ import com.orangehrm.resusables.window.Window;
 
 public class EmployeeManagement extends Login implements EmployeeManagement_OR{
 	
-	Window window;
-	Pagination pagination;
-	
 	// filter box functionality
 	
 	// pagination functionality --- check all pages by clicking on individual page number
@@ -23,28 +20,28 @@ public class EmployeeManagement extends Login implements EmployeeManagement_OR{
 	
 	public boolean navigateAndVerifyTab(String pageName) {
 		
-		onClick(getXpath(tabName, pageName));
+		cf.onClick(cf.getXpath(tabName, pageName));
 		
-		boolean isTabPresent = verifyTab(pageName);
+		boolean isTabPresent = cf.verifyTab(pageName);
 		return isTabPresent;
 	}
 	
 	public void searchEmployeeAndVerify(String empName) {
 		
 		// Verify the page
-		if(verifyTab("Employee Management") && isElementDisplayed(searchBtn)) {
+		if(cf.verifyTab("Employee Management") && cf.isElementDisplayed(searchBtn)) {
 			
 			// Enter the value and press Enter 
-			setValue(searchBtn, empName);
-			setValue(searchBtn, Keys.ENTER);
+			cf.setValue(searchBtn, empName);
+			cf.setValue(searchBtn, Keys.ENTER);
 			
 			// Wait for data to load
-			WebElement loading = getWebElement(loadingBar);
+			WebElement loading = cf.getWebElement(cf.loadingBar);
 			
 			// Verify the data
-			if(waitForTableDataToLoad(ExpectedConditions.invisibilityOf(loading))) {
+			if(cf.waitForTableDataToLoad(ExpectedConditions.invisibilityOf(loading))) {
 				
-				if(isElementDisplayed(getXpath(empDataByName, empName)))
+				if(cf.isElementDisplayed(cf.getXpath(empDataByName, empName)))
 					System.out.println("Data is present and verified");
 			}
 		}
@@ -52,7 +49,7 @@ public class EmployeeManagement extends Login implements EmployeeManagement_OR{
 	
 	public void helpFunctionality() {
 		
-		if(isElementDisplayed(helpBtn)) {
+		if(cf.isElementDisplayed(helpBtn)) {
 			
 			window.clickAndVerifyNewWindow(helpBtn, "How to view my information – OrangeHRM", true);
 		}

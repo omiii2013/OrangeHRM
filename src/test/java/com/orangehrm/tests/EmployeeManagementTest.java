@@ -12,9 +12,8 @@ import com.orangehrm.base.BaseClass;
 import com.orangehrm.pages.login.Login;
 import com.orangehrm.pages.login.employeemanagement.EmployeeManagement;
 
-public class EmployeeManagementTest extends BaseClass{
+public class EmployeeManagementTest extends BaseTest{
 	
-	Login login;
 	EmployeeManagement employeeMng;
 	
 	public EmployeeManagementTest() {
@@ -22,17 +21,11 @@ public class EmployeeManagementTest extends BaseClass{
 		super();
 	}
 	
-	@BeforeMethod
+	@BeforeTest
 	public void setUp() {
 		
 		init();
-		login = new Login();
-	}
-	
-	@Test
-	public void loginDetailsTest() {
-		
-		employeeMng = login.enterLoginDetails(System.getProperty("username"), System.getProperty("password"));
+		employeeMng = login(EmployeeManagement.class);
 	}
 	
 	@Test
