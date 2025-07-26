@@ -17,9 +17,18 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.orangehrm.base.BaseClass;
+import com.orangehrm.resusables.window.Window;
 
-public class CommonFunctions extends BaseClass implements CommonFunctions_OR{
+
+public class CommonFunctions implements CommonFunctions_OR{
+	
+	WebDriver driver;
+	Window window;
+	
+	public CommonFunctions(WebDriver driver) {
+		this.driver = driver;
+		this.window = new Window();
+	}
 	 
 	/**
 	 * Get the single WebElement

@@ -10,10 +10,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class BaseClass {
+import com.orangehrm.CommonFunctions;
+import com.orangehrm.pages.login.Login_OR;
+import com.orangehrm.resusables.pagination.Pagination;
+import com.orangehrm.resusables.window.Window;
+
+public class BaseClass implements Login_OR{
 	
 	static public WebDriver driver;
 	static Properties config;
+	public static CommonFunctions cf;
+	
+	// Resusables instances
+	public static Window window;
+	public static Pagination pagination;
 	
 	public BaseClass() {
 		
@@ -61,6 +71,38 @@ public class BaseClass {
 		
 		driver.get(config.getProperty("url"));
 		
+		
+		cf = new CommonFunctions(driver);
+		window = new Window();
+		pagination = new Pagination();
+	}
+	
+	/**
+	 * Enter the login details for Orange HRM
+	 * @param id	as userName
+	 * @param pass	as password
+	 * @return Home page object i.e. EmployeeManagement
+	 */
+	public static <T> T login(Class<T> pageClass) {
+		
+		// Enter username
+		String userID = config.getProperty("username");
+		driver.findElement(username).sendKeys(userID);
+		
+		// Enter password
+		String pass = config.getProperty("password");
+		driver.findElement(password).sendKeys(pass);
+		
+		// Click Login button
+		driver.findElement(loginBtn).click();
+		
+		try {
+			
+	        return pageClass.getDeclaredConstructor().newInstance(); // No driver passed
+	    } catch (Exception e) {
+	    	
+	        throw new RuntimeException("Failed to instantiate page: " + pageClass.getName(), e);
+	    }
 	}
 	
 	
